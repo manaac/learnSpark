@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import static org.apache.spark.sql.functions.*;
 
-public class Main {
+public class FirstProgram {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
@@ -20,7 +20,7 @@ public class Main {
         df.show(false);
 
         // Transformation
-        df = df.withColumn("full name", concat(df.col("last_name").rlike("\\d+"), lit(", "),df.col("first_name")));
+        df = df.withColumn("full name", concat(df.col("last_name").rlike("\\d+"), lit(", "), df.col("first_name")));
         df.show(false);
 
         df = df.filter(df.col("comment").rlike("\\d+"));
@@ -31,11 +31,11 @@ public class Main {
 
         String dbConnection = "jdbc:postgresql://localhost/learnSpark_db";
         Properties properties = new Properties();
-        properties.setProperty("driver","org.postgresql.Driver");
-        properties.setProperty("user","postgres");
-        properties.setProperty("password","admin123");
+        properties.setProperty("driver", "org.postgresql.Driver");
+        properties.setProperty("user", "postgres");
+        properties.setProperty("password", "admin123");
 
-        df.write().mode(SaveMode.Overwrite).jdbc(dbConnection,"table1",properties);
+        df.write().mode(SaveMode.Overwrite).jdbc(dbConnection, "table1", properties);
 
     }
 }
