@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession;
 import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.lit;
 
-public class Project3 {
+public class Combine2Datasets {
     public static void main(String[] args) {
         SparkSession sparkSession = SparkSession.builder().appName("Combine 2 Datasets").master("local").getOrCreate();
 
@@ -31,6 +31,10 @@ public class Project3 {
         // Match by column names using the unionByName() method.
         // if we use just the union() method, it matches the columns based on order.
         Dataset<Row> df = durhamDF.unionByName(philDF);
+
+//        Dataset<Row> df = durhamDF.intersect(philDF);
+//        Dataset<Row> df = durhamDF.except(philDF);
+
         System.out.println("combineDataFrames schema:");
         df.printSchema();
         System.out.println("combineDataFrames output:");

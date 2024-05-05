@@ -7,9 +7,10 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Properties;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.concat;
+import static org.apache.spark.sql.functions.lit;
 
-public class FirstProgram {
+public class Csv2Db {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
