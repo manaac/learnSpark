@@ -12,7 +12,7 @@ public class DataSetToDataFrame {
     public static void main(String[] args) {
         SparkSession sparkSession = SparkSession.builder().appName("Array to Dataset<String>").master("local").getOrCreate();
 
-        String[] stringList = {"banana", "orange", "banana", "carrot", "mango", "mango"};
+        String[] stringList = new String[]{"banana", "orange", "banana", "carrot", "mango", "mango"};
         System.out.println(stringList);
 
         List<String> data = Arrays.asList(stringList);
