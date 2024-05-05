@@ -16,8 +16,18 @@ public class MapReduce {
         List<String> fruitList = Arrays.asList(fruit);
         Dataset<String> ds = sparkSession
                 .createDataset(fruitList, Encoders.STRING());
-        ds = ds.map((MapFunction<String, String>) row -> "word: " + row, Encoders.STRING());
+        ds = ds.map(new StringMapper(), Encoders.STRING());
+//        ds = ds.map((MapFunction<String, String>) row -> "word: " + row, Encoders.STRING());
         ds.printSchema();
         ds.show();
     }
+
+    static class StringMapper implements MapFunction<String, String> {
+        @Override
+        public String call(String s) {
+            return "word: " + s;
+        }
+    }
+
+
 }
