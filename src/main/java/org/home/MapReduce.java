@@ -1,6 +1,7 @@
 package org.home;
 
 import org.apache.spark.api.java.function.MapFunction;
+import org.apache.spark.api.java.function.ReduceFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.SparkSession;
@@ -20,12 +21,24 @@ public class MapReduce {
 //        ds = ds.map((MapFunction<String, String>) row -> "word: " + row, Encoders.STRING());
         ds.printSchema();
         ds.show();
+
+        Dataset<String> ds1 = sparkSession
+                .createDataset(fruitList, Encoders.STRING());
+        String stringValue = ds1.reduce(new StringReducer());
+        System.out.println(stringValue);
     }
 
     static class StringMapper implements MapFunction<String, String> {
         @Override
         public String call(String s) {
             return "word: " + s;
+        }
+    }
+
+    static class StringReducer implements ReduceFunction<String> {
+        @Override
+        public String call(String s, String t1) {
+            return s + " " + t1;
         }
     }
 
